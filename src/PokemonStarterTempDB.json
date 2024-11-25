@@ -1,0 +1,64 @@
+{"pokemon":[
+    {"pokeName":"Bulbasaur",
+        "pokeNum":1,
+        "pokeType":"Grass/Poison",
+        "pokeImage":"bulbasaur.png",
+        "pokeDescription": "The more sunlight Ivysaur bathes in, the more strength wells up within it, allowing the bud on its back to grow larger."
+    },
+    {"pokeName":"Charmander",
+        "pokeNum":4,
+        "pokeType":"Fire",
+        "pokeImage":"charmander.png",
+        "pokeDescription":"The flame on its tail shows the strength of its life-force. If Charmander is weak, the flame also burns weakly."
+    },
+    {
+    "pokeName":"Squirtle",
+    "pokeNum":7,
+    "pokeType":"Water",
+    "pokeImage":"squirtle.png",
+    "pokeDescription":"After birth, its back swells and hardens into a shell. It sprays a potent foam from its mouth."
+    },
+     {
+        "pokeName": "Chikorita",
+        "pokeNum": 152,
+        "pokeType": "Grass",
+        "pokeImage": "chikorita.png",
+        "pokeDescription": "It loves to bask in the sunlight. It uses the leaf on its head to seek out warm places."
+    },
+    {
+        "pokeName": "Cyndaquil",
+        "pokeNum": 155,
+        "pokeType": "Fire",
+        "pokeImage": "cyndaquil.png",
+        "pokeDescription": "It usually stays hunched over. If it is angry or surprised, it shoots flames out of its back."
+    },
+    {
+        "pokeName": "Totodile",
+        "pokeNum": 158,
+        "pokeType": "Water",
+        "pokeImage": "totodile.png",
+        "pokeDescription": "Its powerful, well-developed jaws are capable of crushing anything. Even its Trainer must be careful."
+    },
+
+    {
+        "pokeName": "Treecko",
+        "pokeNum": 252,
+        "pokeType": "Grass",
+        "pokeImage": "treecko.png",
+        "pokeDescription": "The small hooks on the soles of its feet latch on to walls and ceilings, so it will never fall even while hanging upside down."
+    },
+    {
+        "pokeName": "Torchic",
+        "pokeNum": 255,
+        "pokeType": "Fire",
+        "pokeImage": "torchic.png",
+        "pokeDescription": "Torchic feels toasty warm if you hug it. It has a flame sac inside its belly, and the flames burn continuously as long as Torchic has life in it."
+    },
+    {
+        "pokeName": "Mudkip",
+        "pokeNum": 258,
+        "pokeType": "Water",
+        "pokeImage": "mudkip.png",
+        "pokeDescription": "It has the power to crush large boulders into pieces. To rest, it buries itself in mud at the bottom of a river."
+    }
+]}

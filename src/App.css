@@ -1,0 +1,27 @@
+/* Pokémon info box */
+#pokemon-info {
+  margin-top: 10px; /* Space above */
+  padding: 10px; /* Inner spacing */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center; /* Center text */
+}
+
+/* Pokémon Name */
+#pokemon-name {
+  font-weight: bold; /* Make the text bold */
+  font-size: 1.5em; /* Larger text size */
+  margin: 10px 0; /* Add spacing */
+}
+
+
+
+/* Pokémon Description */
+#pokemon-description {
+  margin: 10px 0; /* Space around description */
+  font-size: 1em; /* Standard font size */
+}
+#pokemon-number{
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}

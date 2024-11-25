@@ -1,0 +1,91 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b6b5b5; /* Light gray background */
+  color: #333; /* Dark text for readability */
+  max-width: 1200px; /* Restrict the content width */
+  min-width: 300px; /* Ensure a readable minimum width */
+  margin: 0 auto; /* Center the body horizontally */
+  padding: 20px; /* Padding around the edges */
+}
+
+/* Header styles */
+header {
+  background-color: #ff0000; /* Bright red header */
+  color: white; /* White text for contrast */
+  text-align: center; /* Center header content */
+  padding: 20px 0; /* Space above and below */
+  border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+/* Main content container */
+main {
+  margin: 20px auto; /* Center content with some margin */
+  padding: 20px; /* Inner padding */
+  background-color: #ffb3b3; /* Light pinkish-red background */
+  border: 2px solid #ff0000; /* Red border for theme alignment */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 90%; /* Responsive width */
+  max-height: 90vh; /* Restrict height to prevent overflow */
+  overflow: auto; /* Allow scrolling for overflowing content */
+}
+
+/* Pokémon image */
+#starter-image {
+  display: block; /* Ensure image behaves like a block element */
+  margin: 10px auto; /* Center the image */
+  max-width: 100%; /* Keep the image responsive */
+  background-color: #97bcf8cd; /* Light blue background */
+  border: 2px solid #ff0000; /* Red border */
+  border-radius: 5px; /* Rounded corners */
+}
+
+
+
+/* Generator prompt */
+#generator-prompt {
+  margin: 20px 0; /* Add spacing above and below */
+  text-align: center; /* Center the text */
+  font-size: 1.2em; /* Slightly larger font */
+  color: white; /* White text for contrast */
+}
+
+/* Center the button container */
+#generate {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center button horizontally */
+  margin-top: 20px; /* Add spacing above */
+}
+
+/* Button styling */
+#generate-button {
+  background-color: #ff0000; /* Bright red button */
+  color: white; /* White text for contrast */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Inner padding */
+  cursor: pointer; /* Pointer cursor for interaction */
+  font-size: 1em; /* Standard button font size */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover effect for button */
+#generate-button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Footer styles */
+footer {
+  text-align: center; /* Center footer content */
+  margin-top: 20px; /* Space above footer */
+  font-size: 0.9em; /* Slightly smaller font size */
+  
+}
