@@ -91,7 +91,9 @@ footer {
 }
 
 @media (max-width: 600px) {
+  
   body {
+    max-height: 300px;
     font-size: 14px; /* Adjust font size */
   }
 
