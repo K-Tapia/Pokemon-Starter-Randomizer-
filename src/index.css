@@ -89,3 +89,31 @@ footer {
   font-size: 0.9em; /* Slightly smaller font size */
   
 }
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Adjust font size */
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  #starter-image {
+    max-width: 90%; /* Reduce image width */
+  }
+
+  #generate-button {
+    width: 100%; /* Full-width button */
+    padding: 12px;
+  }
+
+  header {
+    padding: 15px 0; /* Adjust header padding */
+    font-size: 1.2em;
+  }
+
+  footer {
+    font-size: 0.9em; /* Smaller footer text */
+  }
+}
