@@ -1,9 +1,42 @@
 /* Pokémon info box */
 #pokemon-info {
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Stack elements vertically by default */
+  align-items: center; /* Center content horizontally */
+  justify-content: flex-start; /* Align content to the top */
   margin-top: 10px; /* Space above */
   padding: 10px; /* Inner spacing */
   border-radius: 5px; /* Rounded corners */
   text-align: center; /* Center text */
+  max-height: 300px; /* Limit max height */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+  width: 100%; /* Ensure full width */
+}
+
+/* Make Pokémon info responsive */
+@media (max-width: 600px) {
+  #pokemon-info {
+    padding: 8px; /* Slightly reduce padding on small screens */
+    margin-top: 8px; /* Reduce margin */
+    max-height: 250px; /* Slightly smaller max height on mobile */
+  }
+
+  #pokemon-name {
+    font-size: 1.2em; /* Slightly smaller font on mobile */
+  }
+
+  #pokemon-description {
+    font-size: 0.9em; /* Smaller font for description */
+    margin: 8px 0; /* Reduced margin */
+  }
+
+  #pokemon-number {
+    font-size: 1.5em; /* Adjust size for better readability */
+  }
+
+  #starter-image {
+    max-width: 80%; /* Ensure image doesn’t overflow */
+  }
 }
 
 /* Pokémon Name */
@@ -13,14 +46,13 @@
   margin: 10px 0; /* Add spacing */
 }
 
-
-
 /* Pokémon Description */
 #pokemon-description {
   margin: 10px 0; /* Space around description */
   font-size: 1em; /* Standard font size */
 }
-#pokemon-number{
+
+#pokemon-number {
   text-align: center;
   font-size: 2em;
   font-weight: bold;
