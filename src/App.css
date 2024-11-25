@@ -8,7 +8,7 @@
   padding: 10px; /* Inner spacing */
   border-radius: 5px; /* Rounded corners */
   text-align: center; /* Center text */
-  max-height: 300px; /* Limit max height */
+  max-height: 200px; /* Limit max height */
   overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
   width: 100%; /* Ensure full width */
 }
