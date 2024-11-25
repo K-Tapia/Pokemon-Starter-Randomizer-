@@ -48,7 +48,7 @@ function App() {
     setPokemon(selectedPokemon); 
     setNumPrompt(`Pokedex Entry: ${selectedPokemon.pokeNum}`);
     setPrompt("Generate Again?");
-    setOpeningImage(`images/${selectedPokemon.pokeImage}`);
+    setOpeningImage(`/images/${selectedPokemon.pokeImage}`);
 
    
   setPokemonStyles({
