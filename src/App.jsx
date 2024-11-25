@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Pokeball from "./assets/PokeballShaking.gif";
-import PokeDB from "./PokemonStarterTempDb.json";
+import PokeDB from "./PokemonStarterTempDB.json";
 import {useEffect} from 'react';
 function App() {
   //this will be altered later when ran by the json list
