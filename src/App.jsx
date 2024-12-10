@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Pokeball from "./assets/PokeballShaking.gif";
-import PokeDB from "./PokemonStarterTempDB.json";
+//import PokeDB from "./PokemonStarterTempDB.json";
 import {useEffect} from 'react';
 function App() {
   //this will be altered later when ran by the json list
@@ -32,23 +32,42 @@ function App() {
     info: {},
   });
 
+
+/*
   //Essentially retrieving our json db
   useEffect(()=>{
     //console.log("Loaded PokeDB: ",PokeDB);
    setPokemonList(PokeDB.pokemon);
   }
   ,[]);
+  */
+
+  useEffect(()=> {
+    fetch('/api/pokemon')
+    .then((response)=> response.json())
+    .then((data)=> {
+      setPokemonList(data.pokemon);
+      
+
+    })
+    .catch((error)=>('Error fetching the Pokemon Data', error));
+  },[]);
+  
 
   //handles how our generate button will work by interacting with the json db
   const generateButtonLogic= () =>{
+    
     const randomArr= Math.floor(Math.random()*pokemonList.length);
     //console.log("Pokemon List Length in Button Logic:", pokemonList.length);
     const selectedPokemon= pokemonList[randomArr];
    
     setPokemon(selectedPokemon); 
+    console.log('Selected Pokemon:', selectedPokemon);
+console.log('Pokemon List Length:', pokemonList.length);
     setNumPrompt(`Pokedex Entry: ${selectedPokemon.pokeNum}`);
     setPrompt("Generate Again?");
     setOpeningImage(`/images/${selectedPokemon.pokeImage}`);
+    
 
    
   setPokemonStyles({
