@@ -40,10 +40,11 @@ function App() {
    setPokemonList(PokeDB.pokemon);
   }
   ,[]);
-  */
+  
 
+  const 
   useEffect(()=> {
-    fetch('/api/pokemon')
+    fetch('http://localhost:10000/api/pokemon')
     .then((response)=> response.json())
     .then((data)=> {
       setPokemonList(data.pokemon);
@@ -52,23 +53,38 @@ function App() {
     })
     .catch((error)=>('Error fetching the Pokemon Data', error));
   },[]);
+  */
   
-
+  const pokeNameArray = ["Bulbasaur","Charmander","Squirtle","Torchic","Chikorita","Totodile","Mudkip","Treecko","Cyndaquil"];
+  
   //handles how our generate button will work by interacting with the json db
-  const generateButtonLogic= () =>{
+  const generateButtonLogic= async () =>{
     
-    const randomArr= Math.floor(Math.random()*pokemonList.length);
+    //const randomArr= Math.floor(Math.random()*pokemonList.length);  
     //console.log("Pokemon List Length in Button Logic:", pokemonList.length);
-    const selectedPokemon= pokemonList[randomArr];
-   
-    setPokemon(selectedPokemon); 
+    //const selectedPokemon= pokemonList[randomArr];
+    //Trying new way to fetch data
+    const randomArr= Math.floor(Math.random()*pokeNameArray.length);
+    const randomPokeName= pokeNameArray[randomArr];
+   try {
+    const response = await fetch(`http://localhost:10000/api/pokemon/pokeName/${randomPokeName}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch Pokémon: ${response.status}`);
+    }
+    
+    const selectedPokemon = await response.json();
+    if (selectedPokemon.error) {
+      throw new Error(selectedPokemon.error);
+    }
+    setPokemon(selectedPokemon);
+    
     console.log('Selected Pokemon:', selectedPokemon);
 console.log('Pokemon List Length:', pokemonList.length);
     setNumPrompt(`Pokedex Entry: ${selectedPokemon.pokeNum}`);
     setPrompt("Generate Again?");
     setOpeningImage(`/images/${selectedPokemon.pokeImage}`);
     
-
+  
    
   setPokemonStyles({
     name: {
@@ -94,8 +110,12 @@ console.log('Pokemon List Length:', pokemonList.length);
       borderRadius: '5px',
     }
   });
-
+   }
+   catch(error){
+    console.log ("error fetching pokemon");
+   }
   };
+
     
 
   return (
