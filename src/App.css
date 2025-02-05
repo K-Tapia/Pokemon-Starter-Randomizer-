@@ -12,6 +12,39 @@
   overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
   width: 100%; /* Ensure full width */
 }
+#center-pic{
+  display:flex;
+  position:relative;
+ 
+}
+#opening-image{
+ position:relative;
+ left :13%;
+
+ 
+}
+#Active-filtered-pokemon {
+  
+  
+  position: sticky;
+  top: 10%; left: 100%;
+  border: .5px solid #ff0000;
+  background-color: #97bcf8cd;
+  border-radius: 1px;
+  max-width: 20%;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x:hidden;
+  
+}
+#filtered-pokemon{
+position: relative;
+
+}
+#filtered-image{
+  position: relative;
+  max-width: 30%;
+}
 
 /* Make Pokémon info responsive */
 @media (max-width: 600px) {
