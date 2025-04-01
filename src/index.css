@@ -15,6 +15,17 @@ body {
   margin: 0 auto; /* Center the body horizontally */
   padding: 20px; /* Padding around the edges */
 }
+#pokeheader{
+  position: relative;
+  text-align:center;
+}
+#pokemon-describe{
+  position:relative;
+  text-align:center;
+  background-color:#b6b5b5;
+  color:#ffffff;
+  
+}
 
 /* Header styles */
 header {
@@ -40,6 +51,8 @@ main {
 
 /* Pokémon image */
 #starter-image {
+  position:relative;
+  
   display: block; /* Ensure image behaves like a block element */
   margin: 10px auto; /* Center the image */
   max-width: 100%; /* Keep the image responsive */
@@ -102,7 +115,7 @@ footer {
   }
 
   #starter-image {
-    max-width: 90%; /* Reduce image width */
+    max-width: 10%; /* Reduce image width */
   }
 
   #generate-button {

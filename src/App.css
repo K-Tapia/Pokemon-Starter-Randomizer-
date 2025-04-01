@@ -14,12 +14,13 @@
 }
 #center-pic{
   display:flex;
-  position:relative;
+  position:row;
  
 }
 #opening-image{
- position:relative;
- left :13%;
+ position:sticky;
+ float:left;
+ 
 
  
 }
@@ -27,7 +28,7 @@
   
   
   position: sticky;
-  top: 10%; left: 100%;
+   left: 70%;
   border: .5px solid #ff0000;
   background-color: #97bcf8cd;
   border-radius: 1px;
@@ -35,8 +36,9 @@
   max-height: 300px;
   overflow-y: auto;
   overflow-x:hidden;
-  
+  float:left;
 }
+
 #filtered-pokemon{
 position: relative;
 
@@ -47,7 +49,7 @@ position: relative;
 }
 
 /* Make Pokémon info responsive */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   #pokemon-info {
     padding: 8px; /* Slightly reduce padding on small screens */
     margin-top: 8px; /* Reduce margin */
@@ -59,6 +61,8 @@ position: relative;
   }
 
   #pokemon-description {
+    position:relative;
+    
     font-size: 0.9em; /* Smaller font for description */
     margin: 8px 0; /* Reduced margin */
   }
@@ -68,7 +72,18 @@ position: relative;
   }
 
   #starter-image {
-    max-width: 80%; /* Ensure image doesn’t overflow */
+    max-width: 30%;
+    float:left; /* Ensure image doesn’t overflow */
+  }
+  #Active-filtered-pokemon{
+    max-width:20%;
+    float:left;
+  }
+
+  #center-pic{
+    display:flex;
+    flex-direction:row;
+    position:absolute;
   }
 }
 
