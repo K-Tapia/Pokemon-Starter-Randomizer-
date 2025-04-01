@@ -35,7 +35,7 @@ function App() {
     const randomPokeName = pokeNameArray[randomIndex];
 
     try {
-      const response = await fetch(`http://localhost:10000/api/pokemon/pokeName/${randomPokeName}`);
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/pokemon/pokeName/${randomPokeName}`);
       if (!response.ok) throw new Error(`Failed to fetch Pokémon: ${response.status}`);
 
       const selectedPokemon = await response.json();
@@ -77,7 +77,7 @@ function App() {
   useEffect(() => {
     const fetchFilteredData = async () => {
       try {
-        const response = await fetch("http://localhost:10000/api/pokemon/filter", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/pokemon/filter`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(selectedFilters), // Use updated selectedFilters

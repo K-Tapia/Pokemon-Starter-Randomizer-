@@ -10,7 +10,7 @@ const AboutPoke=()=>{
   const [pokemon, setPokemon]=useState([]);
 
   useEffect(()=>{
-    fetch(`http://localhost:10000/api/pokemon/pokeName/${pokeName}`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/pokemon/pokeName/${pokeName}`)
     .then((response)=>response.json())
     .then((data)=>{
       setPokemon(data)
