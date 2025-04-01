@@ -1,113 +1,239 @@
-import { useState } from 'react';
-import './App.css';
+import { useState,useEffect } from "react";
+import { NavLink, Link } from "react-router";
+
+
+import "./App.css";
 import Pokeball from "./assets/PokeballShaking.gif";
-import PokeDB from "./PokemonStarterTempDB.json";
-import {useEffect} from 'react';
+
+
+/**
+ * 
+ * TODOS 
+ * 1.) Remove the dom stuff, and do things the React-y way, which is that map.
+ * 2.) clean up code, for instance, you no longer need the defaultArray
+ * 3.) Install React Router, use the library doc
+ * 4.) Configure the router with routes, just do the home page "/" and an about page.
+ */
 function App() {
-  //this will be altered later when ran by the json list
+  const [selectedFilters, setSelectedFilters] = useState({});
   const [pokemon, setPokemon] = useState({
-   pokeName:"",
-        pokeNum:0,
-        pokeType:"",
-        pokeImage:"",
-        pokeDescription:"" 
-  });
-  //This will be changed once the generate button is clicked to an updated prompt
-  const [prompt, setPrompt] = useState(
-    "Welcome To Pokemon Starter Generator. Click on the Generate Button to Generate a Starter."
-  );
-  const [numPrompt, setNumPrompt] = useState(
-    ""
-  );
-  //Image will change once the button is clicked 
-  const [starterImage, setOpeningImage]= useState(
-    Pokeball
-  );
-  //This will store the entirety of the json file into this list.
-  const [pokemonList, setPokemonList]= useState([]);
-
-  const [pokemonStyles, setPokemonStyles] = useState({
-    name: {},
-    type: {},
-    info: {},
+    pokeName: "",
+    pokeNum: 0,
+    pokeType: "",
+    pokeImage: "",
+    pokeDescription: "",
   });
 
-  //Essentially retrieving our json db
-  useEffect(()=>{
-    //console.log("Loaded PokeDB: ",PokeDB);
-   setPokemonList(PokeDB.pokemon);
-  }
-  ,[]);
+  const [pokeNameArray, setPokeNameArray] = useState();
+  const [pokemons, setPokemons] = useState([])
+  const [starterImage, setOpeningImage] = useState(Pokeball);
+  const [prompt, setPrompt] = useState("Welcome To Pokemon Starter Generator. Click on the Generate Button to Generate a Starter.");
+  const [numPrompt, setNumPrompt] = useState("");
 
-  //handles how our generate button will work by interacting with the json db
-  const generateButtonLogic= () =>{
-    const randomArr= Math.floor(Math.random()*pokemonList.length);
-    //console.log("Pokemon List Length in Button Logic:", pokemonList.length);
-    const selectedPokemon= pokemonList[randomArr];
-   
-    setPokemon(selectedPokemon); 
-    setNumPrompt(`Pokedex Entry: ${selectedPokemon.pokeNum}`);
-    setPrompt("Generate Again?");
-    setOpeningImage(`/images/${selectedPokemon.pokeImage}`);
+  const generateButtonLogic = async () => {
+    const randomIndex = Math.floor(Math.random() * pokeNameArray.length);
+    const randomPokeName = pokeNameArray[randomIndex];
 
-   
-  setPokemonStyles({
-    name: {
-      fontWeight: 'bold',
-      fontSize: '1.5em',
-      margin: '10px 0',
-    },
-    type: {
-      display: 'inline-block',
-      fontWeight: 'bold',
-      fontSize: '1em',
-      margin: '10px 0',
-      border: '2px solid #ff0000',
-      padding: '2px',
-      borderRadius: '5px',
-      backgroundColor: '#eeeeee',
-    },
-    info: {
-      marginTop: '20px',
-      padding: '10px',
-      backgroundColor: '#97bcf8cd',
-      border: '1px solid #ff0000',
-      borderRadius: '5px',
+    try {
+      const response = await fetch(`http://localhost:10000/api/pokemon/pokeName/${randomPokeName}`);
+      if (!response.ok) throw new Error(`Failed to fetch Pokémon: ${response.status}`);
+
+      const selectedPokemon = await response.json();
+      if (selectedPokemon.error) throw new Error(selectedPokemon.error);
+
+      setPokemon(selectedPokemon);
+      setNumPrompt(`Pokedex Entry: ${selectedPokemon.pokeNum}`);
+      setPrompt("Generate Again?");
+      setOpeningImage(`/images/${selectedPokemon.pokeImage}`);
+
+    } catch (error) {
+      console.error("Error fetching Pokémon:", error);
     }
-  });
-
   };
+
+  const handleButtonSelect = (filterKey) => {
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters };
+      
+      switch(filterKey){
+        case "kanto":
+        case "johto":
+        case "hoenn":
+        case "fire":
+        case "water":
+        case "grass":
+          updatedFilters[filterKey]=!updatedFilters[filterKey];
+          break;
+          default:
+            console.log("filter couldn't be read properly",filterKey);
+            break;
+      }
+      return updatedFilters;
+    });
+  };
+  
+  
+  // UseEffect to fetch filtered data when selectedFilters change
+  useEffect(() => {
+    const fetchFilteredData = async () => {
+      try {
+        const response = await fetch("http://localhost:10000/api/pokemon/filter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(selectedFilters), // Use updated selectedFilters
+        });
+
+        if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
+
+        const data = await response.json();
+        console.log(data);
+        if (Array.isArray(data)){
+          setPokeNameArray(data.map((p)=>p.pokeName));
+        }else if(data.length===0){
+          setPokeNameArray();
+        }
+        console.log((data));
+        // filterList(data);
+        setPokemons(data)
+      } catch (error) {
+        console.error("API fetch error:", error);
+      }
+    };
+
+    console.log(selectedFilters, "hello")
+    if (Object.keys(selectedFilters).length > 0) {
+      console.log("here")
+      fetchFilteredData();
+      console.log("there")
+     
+    } else if(Object.keys(selectedFilters).length===0){
+      // setPokeNameArray(defaultArray);
+      fetchFilteredData()
+    }
     
 
+  }, [selectedFilters]); //fetch when selectedFilters change
+
+  const filterButtonStyle = (filter, selectedFilters) => {
+    return {
+      backgroundColor: selectedFilters[filter] ? "#ffcc00" : "#ddd", // Highlight when selected
+      color: selectedFilters[filter] ? "#000" : "#333", // Text color based on selection
+      border: "1px solid #333",
+      padding: "8px 15px",
+      margin: "5px",
+      cursor: "pointer",
+      borderRadius: "5px",
+      transition: "background-color 0.3s ease", // Smooth transition
+    };
+  };
+  
   return (
     <>
       <header>
         <h1>Pokemon Starter Generator</h1>
-    </header>
-   
-        <main> 
-            <p id="pokemon-number">{numPrompt}</p>
-            <div id="opening-image">
-                <img id="starter-image" src={starterImage} alt="Starter Pokemon"/>
-            </div>
-              <div id="pokemon-info"style={pokemonStyles.info}>
-                <p id="pokemon-name" style={pokemonStyles.name}>{pokemon?.pokeName}</p>
-                <p id="pokemon-type" style={pokemonStyles.type}>{pokemon?.pokeType}</p>
-                <p id="pokemon-description">{pokemon?.pokeDescription}</p>
-                 </div>
-            <h2 id="generator-prompt">{prompt}</h2>
-            <div id="generate">
-                <input type="button" id="generate-button" value="Generate" onClick={generateButtonLogic}/>
-            </div>
+      </header>
+
+      <main>
+      <div id= 'pokeheader'>
+      <p id="pokemon-number">{numPrompt}</p>
+      <p id="pokemon-name">{pokemon?.pokeName}</p>
+          <p id="pokemon-type">{pokemon?.pokeType}</p>
+      </div>
+     
+            <div id="center-pic">
+            <div id="Active-filtered-pokemon">
+            {pokemons.map((pokemon) => {
+              console.log("pokemon.pokeName:", pokemon.pokeName);
+            return (
+               <Link to={`/about/${pokemon.pokeName}`} key={pokemon.pokeName}>
+                <div key={pokemon.pokeName}>{pokemon.pokeName}
+              <img key= {`filterImage${pokemon.pokeImage}`}src= {`./images/${pokemon.pokeImage}` }
+              width="40px"
+              height="40px"
+              />
+              </div>
+              </Link>
+              
+              
+            )
+          })}
+            
+          </div> 
+
+        
+       
+        <div id="opening-image">
+          <img id="starter-image" src={starterImage} alt="Starter Pokemon" />
+        </div>
+        </div>
+        <div id="pokemon-describe">
           
-        </main>
-   
-{/**I might add a different footer later on */}
-<footer>
-      <p>&copy; 2024 Pokemon Starter Generator</p>
-    </footer>
+          <p id="pokemon-description">{pokemon?.pokeDescription}</p>
+        </div>
+
+        <h2 id="generator-prompt">{prompt}</h2>
+        <div id="generate">
+          <input type="button" id="generate-button" value="Generate" onClick={generateButtonLogic} />
+        </div>
+
+        {/* Region & Type Filters */}
+        {//potentially change this with useRef interacting inside of a switch case function, error with grass type when selected at before anything else.
+        }
+        <div id="filter-region">
+        <input
+          type="button"
+          id="Kanto"
+          value="Kanto Region"
+          style={filterButtonStyle("kanto", selectedFilters)}
+          onClick={() => handleButtonSelect("kanto")}
+        />
+        <input
+          type="button"
+          id="Johto"
+          value="Johto Region"
+          style={filterButtonStyle("johto", selectedFilters)}
+          onClick={() => handleButtonSelect("johto")}
+        />
+        <input
+          type="button"
+          id="Hoenn"
+          value="Hoenn Region"
+          style={filterButtonStyle("hoenn", selectedFilters)}
+          onClick={() => handleButtonSelect("hoenn")}
+        />
+        <input
+          type="button"
+          id="Fire"
+          value="Fire Type"
+          style={filterButtonStyle("fire", selectedFilters)}
+          onClick={() => handleButtonSelect("fire")}
+        />
+        <input
+          type="button"
+          id="Water"
+          value="Water Type"
+          style={filterButtonStyle("water", selectedFilters)}
+          onClick={() => handleButtonSelect("water")}
+        />
+        <input
+          type="button"
+          id="Grass"
+          value="Grass Type"
+          style={filterButtonStyle("grass", selectedFilters)}
+          onClick={() => handleButtonSelect("grass")}
+        />
+
+        </div>
+      </main>
+
+      <footer>
+        <nav>
+          <button><Link to="/About">About</Link></button>
+        </nav>
+        <p>&copy; 2024 Pokemon Starter Generator</p>
+      </footer>
     </>
   );
 }
 
-export default App
+export default App;
