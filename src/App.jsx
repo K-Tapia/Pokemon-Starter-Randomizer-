@@ -166,7 +166,7 @@ function App() {
           <img id="starter-image" src={starterImage} alt="Starter Pokemon" />
         </div>
         </div>
-        <div id="pokemon-describe">
+        <div id= "below-info"> <div id="pokemon-describe">
           
           <p id="pokemon-description">{pokemon?.pokeDescription}</p>
         </div>
@@ -174,7 +174,8 @@ function App() {
         <h2 id="generator-prompt">{prompt}</h2>
         <div id="generate">
           <input type="button" id="generate-button" value="Generate" onClick={generateButtonLogic} />
-        </div>
+        </div></div>
+       
 
         {/* Region & Type Filters */}
         {//potentially change this with useRef interacting inside of a switch case function, error with grass type when selected at before anything else.
@@ -227,10 +228,7 @@ function App() {
       </main>
 
       <footer>
-        <nav>
-          <button><Link to="/About">About</Link></button>
-        </nav>
-        <p>&copy; 2024 Pokemon Starter Generator</p>
+                <p>&copy; 2024 Pokemon Starter Generator</p>
       </footer>
     </>
   );
