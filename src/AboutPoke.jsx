@@ -22,14 +22,14 @@ const AboutPoke=()=>{
     return <h2>Pokemon not found, loading...</h2>
   } 
   return (
-      <div>
-          
-          <h1>{pokemon.pokeName} Pokedex Entry: {pokemon.pokeNum}</h1>
+    <main>
+    <div id="pokeheader">
+            <h1>{pokemon.pokeName} Pokedex Entry: {pokemon.pokeNum}</h1>
           <img src={`/images/${pokemon.pokeImage}` }></img>
           <p>{pokemon.pokeDescription}</p>
-
-          <button><Link to="/">Return to Generator</Link></button>
+          <button ><Link to="/">Return to Generator</Link></button>
       </div>
+      </main>
     );  
 };
 export default AboutPoke;
